@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UWW KMeans Node
+Bundle-SymbolicName: org.uwwitscm.analytics.kmeans;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: UWW ITSCM
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: org.knime.core,
+ org.knime.base
+Bundle-ActivationPolicy: lazy
+Export-Package: org.uwwitscm.analytics.kmeans

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knimeNode icon="icons/kmeans.png" type="Manipulator">
+   <name>UWW KMeans Clustering</name>
+   <shortDescription>Custom K-Means clustering with full control</shortDescription>
+   <fullDescription>
+      <intro>UWW ITSCM custom K-Means clustering node. Outputs the original table with an appended cluster assignment column.</intro>
+      <tab name="Configuration">
+         <option name="Number of clusters (k)">Number of clusters to create</option>
+         <option name="Maximum iterations">Maximum number of iterations</option>
+         <option name="Columns">Numeric columns to use for distance calculation</option>
+      </tab>
+   </fullDescription>
+   <ports>
+      <inPort index="0" name="Input Table">Table with numeric columns</inPort>
+      <outPort index="0" name="Clustered Table">Input table + cluster column</outPort>
+   </ports>
+</knimeNode>

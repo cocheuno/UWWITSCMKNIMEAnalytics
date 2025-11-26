@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.uwwitscm.analytics.kmeans.feature"
+      label="UWW KMeans Clustering"
+      version="1.0.0.qualifier"
+      provider-name="UWW ITSCM">
+
+   <description>
+      Custom KMeans clustering node for KNIME
+   </description>
+
+   <copyright>
+      Copyright 2025 UWW ITSCM
+   </copyright>
+
+   <license url="https://www.apache.org/licenses/LICENSE-2.0.txt">
+      Apache License 2.0
+   </license>
+
+   <plugin
+         id="org.uwwitscm.analytics.kmeans"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
