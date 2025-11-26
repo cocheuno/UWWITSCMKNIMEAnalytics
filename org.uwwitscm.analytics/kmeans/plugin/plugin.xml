@@ -2,11 +2,11 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-   <!-- This single line forces the node into the Community root -->
    <extension point="org.knime.workbench.repository.nodes">
-      <node factory-class="org.uwwitscm.analytics.kmeans.UWWKmeansNodeFactory"
+      <node
+            factory-class="org.uwwitscm.analytics.kmeans.UWWKmeansNodeFactory"
             id="org.uwwitscm.analytics.kmeans.UWWKmeansNodeFactory"
-            category-path="/community"/>
+            category-path="/community/uww-analytics"/>
    </extension>
 
 </plugin>
