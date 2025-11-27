@@ -1,4 +1,2 @@
-activeProfiles=
 eclipse.preferences.version=1
-resolveWorkspaceProjects=true
-version=1
+lifecycle-mapping.metadata=<lifecycleMappingMetadata><pluginExecutions><pluginExecution><pluginExecutionFilter><groupId>org.eclipse.tycho</groupId><artifactId>tycho-packaging-plugin</artifactId><versionRange>[0.0.0,)</versionRange><goals><goal>*</goal></goals></pluginExecutionFilter><action><ignore/></action></pluginExecution></pluginExecutions></lifecycleMappingMetadata>

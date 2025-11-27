@@ -1,52 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.uwwitscm.analytics</groupId>
-    <artifactId>parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <modules>
-        <module>kmeans/plugin</module>
-        <module>kmeans/feature</module>
-        <module>kmeans/site</module>
-    </modules>
+  <groupId>org.uwwitscm.analytics</groupId>
+  <artifactId>parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <properties>
-        <tycho-version>4.0.8</tycho-version>
-        <knime-version>5.8.0</knime-version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+  <name>UWW ITSCM KNIME Nodes - Parent</name>
+  <description>Parent POM for UWW KMeans multi-module Tycho build</description>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>tycho-maven-plugin</artifactId>
-                <version>${tycho-version}</version>
-                <extensions>true</extensions>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>tycho-p2-repository-plugin</artifactId>
-                <version>${tycho-version}</version>
-            </plugin>
-        </plugins>
-    </build>
+  <modules>
+    <module>kmeans/plugin</module>
+    <module>kmeans/feature</module>
+    <module>kmeans/site</module>
+    <module>kmeans/thirdparty/jcommon-osgi</module>
+    <module>kmeans/thirdparty/jfreechart-osgi</module>
+  </modules>
 
-    <repositories>
-        <repository>
-            <id>eclipse-release</id>
-            <url>https://download.eclipse.org/releases/2023-12</url>
-            <layout>p2</layout>
-        </repository>
-        <repository>
-            <id>knime</id>
-            <url>https://update.knime.com/analytics-platform/5.3</url>
-            <layout>p2</layout>
-        </repository>
-    </repositories>
+  <properties>
+    <!-- Tycho version: single, concrete property -->
+    <tycho.version>4.0.8</tycho.version>
+
+    <!-- Optional alias for compatibility -->
+    <tycho-version>${tycho.version}</tycho-version>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+
+  <build>
+    <!-- Register Tycho as a build extension so packaging types are known when reading child POMs -->
+    <extensions>
+      <extension>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <version>${tycho.version}</version>
+      </extension>
+    </extensions>
+
+    <pluginManagement>
+      <plugins>
+        <!-- Centralize Tycho plugin versions -->
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-packaging-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-compiler-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

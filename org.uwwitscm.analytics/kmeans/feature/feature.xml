@@ -6,7 +6,7 @@
       provider-name="UWW ITSCM">
 
    <description>
-      Custom KMeans clustering node for KNIME
+      Custom KMeans clustering node for KNIME. Packages the org.uwwitscm.analytics.kmeans plugin and its bundled dependencies.
    </description>
 
    <copyright>
@@ -21,7 +21,7 @@
          id="org.uwwitscm.analytics.kmeans"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0.qualifier"
          unpack="false"/>
 
 </feature>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.uwwitscm.analytics</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../../../pom.xml</relativePath>
+  </parent>
+
+  <groupId>org.uwwitscm.thirdparty</groupId>
+  <artifactId>jfreechart-osgi</artifactId>
+  <version>1.5.3</version>
+  <packaging>bundle</packaging>
+
+  <name>JFreeChart (OSGi wrapper)</name>
+
+  <dependencies>
+    <!-- explicit dependency on the wrapper bundle produced by the jcommon module
+         - the <type>bundle</type> helps Maven resolve the artifact type correctly
+         - ensure jcommon-osgi is part of the reactor (parent <modules> includes it) -->
+    <dependency>
+      <groupId>org.uwwitscm.thirdparty</groupId>
+      <artifactId>jcommon-osgi</artifactId>
+      <version>1.0.24</version>
+      <type>bundle</type>
+      <scope>compile</scope>
+    </dependency>
+    <!-- If you still want to compile against the raw upstream artifact in central as a fallback,
+         you can add an additional dependency on org.jfree:jfreechart, but the wrapper should
+         include required classes during bundling. -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>5.1.2</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>org.jfree.jfreechart.osgi</Bundle-SymbolicName>
+            <Export-Package>org.jfree.chart.*</Export-Package>
+            <Import-Package>*;resolution:=optional</Import-Package>
+            <Bundle-Version>${project.version}</Bundle-Version>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<target name="UWW KMeans Target" sequenceNumber="1">
+  <locations>
+    <!-- Eclipse 2025-09 release repo -->
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" type="InstallableUnit">
+      <repository location="https://download.eclipse.org/releases/2025-09"/>
+      <unit id="org.eclipse.sdk" version="0.0.0"/>
+    </location>
+
+    <!-- KNIME Analytics Platform 5.8 update site (adjust if you use a different channel) -->
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" type="InstallableUnit">
+      <repository location="https://update.knime.com/analytics-platform/5.8/"/>
+    </location>
+
+    <!-- Local file-based p2 repository for wrapped bundles produced by the reactor build -->
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" type="InstallableUnit">
+      <repository location="file:${workspace_loc:/kmeans/thirdparty/repository}"/>
+    </location>
+  </locations>
+</target>
