@@ -5,59 +5,20 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Parent points to org.uwwitscm.analytics/pom.xml -->
+  <parent>
+    <groupId>org.uwwitscm.analytics</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
   <groupId>org.uwwitscm.analytics</groupId>
-  <artifactId>parent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <artifactId>org.uwwitscm.analytics.kmeans</artifactId>
+  <version>1.0.0.qualifier</version>
+  <packaging>eclipse-plugin</packaging>
 
-  <name>UWW ITSCM KNIME Nodes - Parent</name>
-  <description>Parent POM for UWW KMeans multi-module Tycho build</description>
+  <name>UWW KMeans Plugin</name>
 
-  <modules>
-    <module>kmeans/plugin</module>
-    <module>kmeans/feature</module>
-    <module>kmeans/site</module>
-    <module>kmeans/thirdparty/jcommon-osgi</module>
-    <module>kmeans/thirdparty/jfreechart-osgi</module>
-  </modules>
-
-  <properties>
-    <!-- Tycho version: single, concrete property -->
-    <tycho.version>4.0.8</tycho.version>
-
-    <!-- Optional alias for compatibility -->
-    <tycho-version>${tycho.version}</tycho-version>
-
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-  </properties>
-
-  <build>
-    <!-- Register Tycho as a build extension so packaging types are known when reading child POMs -->
-    <extensions>
-      <extension>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-packaging-plugin</artifactId>
-        <version>${tycho.version}</version>
-      </extension>
-    </extensions>
-
-    <pluginManagement>
-      <plugins>
-        <!-- Centralize Tycho plugin versions -->
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-packaging-plugin</artifactId>
-          <version>${tycho.version}</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-compiler-plugin</artifactId>
-          <version>${tycho.version}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+  <!-- IMPORTANT: no <modules> block here -->
 </project>

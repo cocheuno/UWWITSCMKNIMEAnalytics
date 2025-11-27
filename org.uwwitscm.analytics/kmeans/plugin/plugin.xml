@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-   <extension point="org.knime.workbench.repository.nodes">
+   <extension point="org.knime.workbench.extension">
       <node
             factory-class="org.uwwitscm.analytics.kmeans.UWWKmeansNodeFactory"
             id="org.uwwitscm.analytics.kmeans.UWWKmeansNodeFactory"
