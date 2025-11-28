@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.uwwitscm.analytics.kmeans.feature"
+      id="org.uwwitscm.analytics.kmeans. feature"
       label="UWW KMeans Clustering"
       version="1.0.0.qualifier"
       provider-name="UWW ITSCM">
 
    <description>
-      Custom KMeans clustering node for KNIME. Packages the org.uwwitscm.analytics.kmeans plugin and its bundled dependencies.
+      Custom KMeans clustering node for KNIME.  Provides unsupervised clustering
+      with visualization capabilities.
    </description>
 
    <copyright>
       Copyright 2025 UWW ITSCM
    </copyright>
 
-   <license url="https://www.apache.org/licenses/LICENSE-2.0.txt">
+   <license url="https://www.apache.org/licenses/LICENSE-2.0. txt">
       Apache License 2.0
    </license>
 
+   <!-- Required KNIME features -->
+   <requires>
+      <import feature="org.knime.features.base" version="5.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <!-- Main KMeans plugin -->
    <plugin
          id="org.uwwitscm.analytics.kmeans"
          download-size="0"
          install-size="0"
-         version="1.0.0.qualifier"
+         version="0.0.0"
+         unpack="false"/>
+
+   <!-- Third-party visualization dependencies -->
+   <plugin
+         id="org.uwwitscm.analytics.jcommon"
+         download-size="0"
+         install-size="0"
+         version="0.0. 0"
+         unpack="false"/>
+
+   <plugin
+         id="org.uwwitscm. analytics.jfreechart"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
