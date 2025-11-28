@@ -1,42 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<? xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4. 0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+                             http://maven.apache. org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0. 0</modelVersion>
 
   <groupId>org.uwwitscm.analytics</groupId>
   <artifactId>parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>UWW ITSCM KNIME Nodes - Parent</name>
-  <description>Parent POM for UWW KMeans multi-module Tycho build</description>
+  <name>UWW ITSCM KNIME Analytics - Parent</name>
+  <description>Parent POM for UWW Analytics multi-module Tycho build</description>
 
   <modules>
+    <module>kmeans/thirdparty/jcommon-osgi</module>
+    <module>kmeans/thirdparty/jfreechart-osgi</module>
     <module>kmeans/plugin</module>
     <module>kmeans/feature</module>
     <module>kmeans/site</module>
-    <module>kmeans/thirdparty/jcommon-osgi</module>
-    <module>kmeans/thirdparty/jfreechart-osgi</module>
   </modules>
 
   <properties>
-    <tycho.version>4.0.8</tycho.version>
-    <tycho-version>${tycho.version}</tycho-version>
+    <tycho. version>4.0.8</tycho.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <knime.version>5.3</knime.version>
   </properties>
 
+  <repositories>
+    <!-- KNIME Analytics Platform Update Site -->
+    <repository>
+      <id>knime-analytics-platform</id>
+      <layout>p2</layout>
+      <url>https://update.knime.com/analytics-platform/${knime.version}</url>
+    </repository>
+    <!-- Eclipse 2024-03 (for KNIME 5.x compatibility) -->
+    <repository>
+      <id>eclipse-2024-03</id>
+      <layout>p2</layout>
+      <url>https://download.eclipse.org/releases/2024-03</url>
+    </repository>
+  </repositories>
+
   <build>
-    <extensions>
-      <extension>
+    <plugins>
+      <!-- THIS IS THE CRITICAL MISSING PLUGIN -->
+      <plugin>
+        <groupId>org.eclipse. tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho. version}</version>
+        <extensions>true</extensions>
+      </plugin>
+
+      <plugin>
         <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-packaging-plugin</artifactId>
-        <version>${tycho.version}</version>
-      </extension>
-    </extensions>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho. version}</version>
+        <configuration>
+          <environments>
+            <environment>
+              <os>win32</os>
+              <ws>win32</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>aarch64</arch>
+            </environment>
+          </environments>
+        </configuration>
+      </plugin>
+    </plugins>
 
     <pluginManagement>
       <plugins>
@@ -45,10 +92,17 @@
           <artifactId>tycho-packaging-plugin</artifactId>
           <version>${tycho.version}</version>
         </plugin>
-
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-compiler-plugin</artifactId>
+          <version>${tycho.version}</version>
+          <configuration>
+            <useProjectSettings>false</useProjectSettings>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-plugin</artifactId>
           <version>${tycho.version}</version>
         </plugin>
       </plugins>
