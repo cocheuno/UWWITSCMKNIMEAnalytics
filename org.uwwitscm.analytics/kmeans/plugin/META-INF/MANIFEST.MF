@@ -1,13 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UWW KMeans Node
-Bundle-SymbolicName: org.uwwitscm.analytics.kmeans;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.uwwitscm. analytics.kmeans;singleton:=true
+Bundle-Version: 1.0.0. qualifier
 Bundle-Vendor: UWW ITSCM
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Require-Bundle: org.knime.core,
- org.knime.base
+Require-Bundle: org.knime.core;bundle-version="[5.0.0,6.0.0)",
+ org.knime.base;bundle-version="[5. 0.0,6.0. 0)",
+ org.knime.workbench.repository;bundle-version="[5.0. 0,6.0.0)";resolution:=optional,
+ org.apache.commons.math3;bundle-version="[3.6.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.uwwitscm.analytics.kmeans
-Import-Package: org.jfree.chart;version="[1.5,2)", org.jfree.data;version="[1.0,2)", *
-Automatic-Module-Name: org.uwwitscm.analytics.kmeans
+Import-Package: org.jfree.chart;version="[1.5,2)",
+ org.jfree. chart.plot;version="[1. 5,2)",
+ org. jfree.data.xy;version="[1.5,2)"
+Automatic-Module-Name: org. uwwitscm.analytics.kmeans
