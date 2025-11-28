@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?pde version="3.8"?>
 <site>
-    <feature id="org.uwwitscm.analytics.kmeans.feature" version="1.0.0.qualifier">
-        <category name="uww.analytics.category"/>
-    </feature>
-    <category-def name="uww.analytics.category" label="UWW Analytics">
-        <description>UWW ITSCM Analytics Extensions</description>
-    </category-def>
+   <feature id="org.uwwitscm. analytics.kmeans.feature" version="0.0.0">
+      <category name="uww. analytics"/>
+   </feature>
+
+   <category-def name="uww.analytics" label="UWW Analytics">
+      <description>
+         UWW ITSCM Analytics Extensions for KNIME. 
+         Includes clustering, classification, and other machine learning nodes.
+      </description>
+   </category-def>
 </site>
