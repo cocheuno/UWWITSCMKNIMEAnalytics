@@ -1,78 +1,131 @@
 package org.uwwitscm.analytics.kmeans;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
-import java.awt.Font;
-import java. util.Map;
+import java.awt.Color;
+import java.util.Map;
 
-import javax.swing. JPanel;
-import javax. swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.knime.core.node.NodeView;
 
 /**
- * Simple text-based node view displaying WCSS and Silhouette data. 
- * JFreeChart version can be added later once dependencies are resolved.
+ * Node view displaying WCSS (Elbow) and Silhouette plots using JFreeChart.
  */
 public class UWWKmeansNodeView extends NodeView<UWWKmeansNodeModel> {
 
-    private final JPanel m_mainPanel;
-    private final JTextArea m_textArea;
+    private final JTabbedPane m_tabbedPane;
+    private ChartPanel m_wcssChartPanel;
+    private ChartPanel m_silhouetteChartPanel;
 
     protected UWWKmeansNodeView(final UWWKmeansNodeModel nodeModel) {
         super(nodeModel);
 
-        m_textArea = new JTextArea();
-        m_textArea.setEditable(false);
-        m_textArea.setFont(new Font("Monospaced", Font. PLAIN, 12));
+        m_tabbedPane = new JTabbedPane();
 
-        m_mainPanel = new JPanel(new BorderLayout());
-        m_mainPanel.add(new JScrollPane(m_textArea), BorderLayout.CENTER);
+        // Create initial empty charts
+        m_wcssChartPanel = new ChartPanel(createWCSSChart(null));
+        m_silhouetteChartPanel = new ChartPanel(createSilhouetteChart(null));
 
-        setComponent(m_mainPanel);
+        m_tabbedPane.addTab("Elbow (WCSS)", m_wcssChartPanel);
+        m_tabbedPane.addTab("Silhouette Score", m_silhouetteChartPanel);
+
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(m_tabbedPane, BorderLayout.CENTER);
+
+        setComponent(mainPanel);
+    }
+
+    private JFreeChart createWCSSChart(final Map<Integer, Double> wcssData) {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+
+        if (wcssData != null && !wcssData.isEmpty()) {
+            XYSeries series = new XYSeries("WCSS");
+            for (Map.Entry<Integer, Double> entry : wcssData.entrySet()) {
+                series.add(entry.getKey().doubleValue(), entry.getValue());
+            }
+            dataset.addSeries(series);
+        }
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Elbow Method - WCSS",
+                "Number of Clusters (k)",
+                "Within-Cluster Sum of Squares",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        customizeChart(chart, new Color(0, 102, 204));
+        return chart;
+    }
+
+    private JFreeChart createSilhouetteChart(final Map<Integer, Double> silhouetteData) {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+
+        if (silhouetteData != null && !silhouetteData.isEmpty()) {
+            XYSeries series = new XYSeries("Silhouette");
+            for (Map.Entry<Integer, Double> entry : silhouetteData.entrySet()) {
+                series.add(entry.getKey().doubleValue(), entry.getValue());
+            }
+            dataset.addSeries(series);
+        }
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Silhouette Score",
+                "Number of Clusters (k)",
+                "Average Silhouette Coefficient",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        customizeChart(chart, new Color(0, 153, 51));
+        return chart;
+    }
+
+    private void customizeChart(final JFreeChart chart, final Color lineColor) {
+        chart.setBackgroundPaint(Color.WHITE);
+
+        XYPlot plot = chart.getXYPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
+        plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
+
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesPaint(0, lineColor);
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+        renderer.setSeriesShapesVisible(0, true);
+        plot.setRenderer(renderer);
     }
 
     @Override
     protected void modelChanged() {
         final UWWKmeansNodeModel model = getNodeModel();
         if (model == null) {
-            m_textArea.setText("No model available.");
+            m_wcssChartPanel.setChart(createWCSSChart(null));
+            m_silhouetteChartPanel.setChart(createSilhouetteChart(null));
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("=== KMeans Clustering Results ===\n\n");
-
-        // Display WCSS data
         Map<Integer, Double> wcssData = model.getWCSSData();
-        if (wcssData != null && ! wcssData.isEmpty()) {
-            sb.append("WCSS (Within-Cluster Sum of Squares):\n");
-            sb.append(String.format("%-10s %s\n", "k", "WCSS"));
-            sb.append("----------------------------\n");
-            for (Map.Entry<Integer, Double> entry : wcssData.entrySet()) {
-                sb.append(String.format("%-10d %. 4f\n", entry.getKey(), entry.getValue()));
-            }
-        } else {
-            sb.append("No WCSS data available.\n");
-        }
+        m_wcssChartPanel.setChart(createWCSSChart(wcssData));
 
-        sb.append("\n");
-
-        // Display Silhouette data
-        Map<Integer, Double> silData = model. getSilhouetteData();
-        if (silData != null && !silData. isEmpty()) {
-            sb.append("Average Silhouette Score:\n");
-            sb.append(String.format("%-10s %s\n", "k", "Silhouette"));
-            sb.append("----------------------------\n");
-            for (Map.Entry<Integer, Double> entry : silData.entrySet()) {
-                sb.append(String.format("%-10d %.4f\n", entry.getKey(), entry.getValue()));
-            }
-        } else {
-            sb.append("No Silhouette data available.\n");
-        }
-
-        m_textArea. setText(sb.toString());
-        m_textArea. setCaretPosition(0);
+        Map<Integer, Double> silData = model.getSilhouetteData();
+        m_silhouetteChartPanel.setChart(createSilhouetteChart(silData));
     }
 
     @Override
