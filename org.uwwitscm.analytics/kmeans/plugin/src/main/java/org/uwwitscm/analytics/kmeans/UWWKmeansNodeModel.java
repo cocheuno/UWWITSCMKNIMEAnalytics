@@ -292,5 +292,5 @@ public class UWWKmeansNodeModel extends NodeModel {
     @Override protected void validateSettings(final NodeSettingsRO settings) throws InvalidSettingsException { m_min_k.validateSettings(settings); m_max_k.validateSettings(settings); m_solution_k.validateSettings(settings); }
     @Override protected void loadInternals(java.io.File nodeInternDir, org.knime.core.node.ExecutionMonitor exec) {}
     @Override protected void saveInternals(java.io.File nodeInternDir, org.knime.core.node.ExecutionMonitor exec) {}
-    @Override protected void reset() {}
+    @Override protected void reset() { m_wcssMap.clear(); m_silMap.clear(); }
 }

@@ -5,6 +5,7 @@
    <extension point="org.knime.workbench.repository.nodes">
       <node
             factory-class="org.uwwitscm.analytics.kmeans.UWWKmeansNodeFactory"
+            icon="./icons/default.png"
             category-path="/community/uww-analytics"/>
    </extension>
 
