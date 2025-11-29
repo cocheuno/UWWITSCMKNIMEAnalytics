@@ -105,11 +105,17 @@ public class UWWKmeansNodeView extends NodeView<UWWKmeansNodeModel> {
         plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
         plot.setRangeGridlinePaint(Color.LIGHT_GRAY);
 
-        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        // Reuse existing renderer if it's the right type, otherwise create new one
+        XYLineAndShapeRenderer renderer;
+        if (plot.getRenderer() instanceof XYLineAndShapeRenderer) {
+            renderer = (XYLineAndShapeRenderer) plot.getRenderer();
+        } else {
+            renderer = new XYLineAndShapeRenderer();
+            plot.setRenderer(renderer);
+        }
         renderer.setSeriesPaint(0, lineColor);
         renderer.setSeriesStroke(0, new BasicStroke(2.0f));
         renderer.setSeriesShapesVisible(0, true);
-        plot.setRenderer(renderer);
     }
 
     @Override
@@ -130,7 +136,19 @@ public class UWWKmeansNodeView extends NodeView<UWWKmeansNodeModel> {
 
     @Override
     protected void onClose() {
-        // Nothing to clean up
+        // Dispose chart resources to prevent memory leaks
+        if (m_wcssChartPanel != null) {
+            JFreeChart chart = m_wcssChartPanel.getChart();
+            if (chart != null) {
+                chart.getPlot().dispose();
+            }
+        }
+        if (m_silhouetteChartPanel != null) {
+            JFreeChart chart = m_silhouetteChartPanel.getChart();
+            if (chart != null) {
+                chart.getPlot().dispose();
+            }
+        }
     }
 
     @Override
