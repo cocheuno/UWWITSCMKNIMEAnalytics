@@ -3,11 +3,21 @@
 [![License](https://img.shields. io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![KNIME](https://img.shields.io/badge/KNIME-5.8-yellow. svg)](https://www.knime.com/)
 
-A custom KNIME Analytics Platform node that performs K-Means clustering analysis on datasets.  This node was developed for a sports analytics class that uses KNIME. Therefore, it has behaviors that are aligned with the needs of the class and less for general purpose.
+A custom KNIME Analytics Platform node that performs K-Means clustering analysis on datasets.  This node was developed for a sports analytics class that uses KNIME. Therefore, it has behaviors that are aligned with the needs of the class and less for general purposes.
 
 ## Overview
 
-This extension provides a K-Means clustering node for the KNIME Analytics Platform, enabling users to perform unsupervised machine learning clustering operations directly within their KNIME workflows.
+This extension provides a K-Means clustering node for the KNIME Analytics Platform, enabling users to perform unsupervised machine learning clustering operations directly within their KNIME workflows.  The use of this node is geared to the students in a sports analytics class.  The workflow (see below) is standard.  The node is run twice.  The first time, the students use the WCSS and Silhouette data to determine the value of k to choose.  The second time, they reconfigure the node and set the value of the Choen k to be the value of k they chose.  The configuration consists of:
+- Minimum k to start the clustering
+- Maximum k to end the clustering
+- Chosen k value
+
+The output consists of four ports:
+- Cluster-assigned data
+- WCSS (Elbow) data
+- Silhouette data
+
+Once the user decides on a k value, they configure the node to run with their chosen k value.  This assigns each data point to a cluster from 0 to k-1.
 
 ### Features
 
