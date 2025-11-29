@@ -139,15 +139,9 @@ public class UWWKmeansNodeView extends NodeView<UWWKmeansNodeModel> {
         // Dispose chart resources to prevent memory leaks
         if (m_wcssChartPanel != null) {
             JFreeChart chart = m_wcssChartPanel.getChart();
-            if (chart != null) {
-                chart.getPlot().dispose();
-            }
         }
         if (m_silhouetteChartPanel != null) {
             JFreeChart chart = m_silhouetteChartPanel.getChart();
-            if (chart != null) {
-                chart.getPlot().dispose();
-            }
         }
     }
 
