@@ -3,7 +3,7 @@
 [![License](https://img.shields. io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![KNIME](https://img.shields.io/badge/KNIME-5.8-yellow. svg)](https://www.knime.com/)
 
-A custom KNIME Analytics Platform node that performs K-Means clustering analysis on datasets.  Developed by UWW ITSCM (University of Wisconsin-Whitewater IT Supply Chain Management). 
+A custom KNIME Analytics Platform node that performs K-Means clustering analysis on datasets.  This node was developed for a sports analytics class that uses KNIME. Therefore, it has behaviors that are aligned with the needs of the class and less for general purpose.
 
 ## Overview
 
@@ -72,7 +72,7 @@ This extension provides a K-Means clustering node for the KNIME Analytics Platfo
 ### Example Workflow
 
 ```
-[Data Reader] → [Column Filter] → [UWW KMeans] → [Color Manager] → [Scatter Plot]
+[Data Reader] → [Column Filter] → [Missing] → [Normalizer] → [UWW KMeans]
 ```
 
 ## Project Structure
@@ -129,7 +129,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## Author
 
-**UWW ITSCM** - University of Wisconsin-Whitewater, IT Supply Chain Management
+**Timothy E. Carone** - Faculty, IT and Supply Chain Management, College of Business and Economics. University of Wisconsin-Whitewater, 
 
 ## Support
 
